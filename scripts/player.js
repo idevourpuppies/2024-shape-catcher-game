@@ -8,7 +8,7 @@ export class Player {
     this.width = 75;
     this.height = 25;
 
-    this.speed = 1;
+    this.speed = 5;
 
     this.keyBinding = {
       up: "ArrowUp",
@@ -65,6 +65,7 @@ export class Player {
       }
     });
   }
+
   update() {
     let dirx = 0;
     let diry = 0;
@@ -95,6 +96,26 @@ export class Player {
 
     this.x += this.speed * dirx;
     this.y += this.speed * diry;
+
+    //prevents going off left
+    if(this.x < 0) {
+      this.x = 0
+    }
+
+    //prevents going off top
+    if(this.y < 0) {
+      this.y = 0
+    }
+
+    //prevents going off right
+    if(this.x + this.width > canvas.width) {
+      this.x = canvas.width - this.width
+    }
+  
+    //prevents going off bottom
+    if(this.y + this.height > canvas.height) {
+      this.y = canvas.height - this.height
+    }
   }
 
   draw() {
