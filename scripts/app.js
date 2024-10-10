@@ -1,27 +1,22 @@
 //@ts-check
 import { canvas, ctx } from "./common/canvas.js";
-import { Player } from "./player.js";
-import { SimpleGoodItem } from "./colectables/good.js"
+import { GameManager } from "./game-manager.js";
 
-let player = new Player();
+let game = new GameManager();
+game.initialize();
 
-let item1 = new SimpleGoodItem(canvas.width / 2, canvas.height / 2)
+let lastTimestamp = 0;
 
-let lastTimeStamp = 0;
+function gameLoop(timestamp) {
+	let elapsedTime = timestamp - lastTimestamp;
+	lastTimestamp = timestamp;
 
-function gameloop(timeSatmp) {
-    let elapsedtime = timeSatmp - lastTimeStamp;
-    lastTimeStamp = timeSatmp;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	game.update(elapsedTime);
+	game.draw();
 
-    item1.update(elapsedtime);
-    item1.draw();
-
-
-player.update();
-player.draw();
-window.requestAnimationFrame(gameloop);
+	window.requestAnimationFrame(gameLoop);
 }
 
-window.requestAnimationFrame(gameloop);
+window.requestAnimationFrame(gameLoop);
