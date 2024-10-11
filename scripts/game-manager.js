@@ -31,6 +31,7 @@ export class GameManager {
 		p1.y -= p1.height / 2;
 
 		this.players.push(p1);
+        console.log("initalize")
 	}
 
 	update(elapsedTime) {
