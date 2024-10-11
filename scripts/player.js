@@ -119,7 +119,7 @@ export class Player {
 	}
 
 	draw() {
-		ctx.fillStyle = "blue";
+		ctx.fillStyle = "";
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 	}
 }
